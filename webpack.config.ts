@@ -7,7 +7,9 @@ module.exports = {
   plugins: [
     new EnvironmentPlugin([
       'FIREBASE_API_DEV',
-      'FIREBASE_API_PROD'
+      'FIREBASE_API_PROD',
+      'FIREBASE_ADMIN',
+      'REDIS_URL'
     ])
   ]
 }

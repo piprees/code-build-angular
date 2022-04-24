@@ -8,6 +8,7 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { handler } from 'api/graphql';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -23,8 +24,10 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
+  // Example Express GraphQL API endpoints
+  server.use(express.json());
+  server.post('/graphql', handler);
+
   // Serve static files from /browser
   server.get('*.*', express.static(distFolder, {
     maxAge: '1y'

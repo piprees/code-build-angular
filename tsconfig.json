@@ -9,6 +9,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -20,8 +21,32 @@
     "module": "es2020",
     "lib": [
       "es2020",
-      "dom"
-    ]
+      "dom",
+      "dom.iterable"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@post/*": [
+        "src/app/post/*"
+      ],
+      "@nav/*": [
+        "src/app/nav/*"
+      ],
+      "@platform/*": [
+        "src/app/platform/firebase/*"
+      ],
+      "@auth/*": [
+        "src/app/auth/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

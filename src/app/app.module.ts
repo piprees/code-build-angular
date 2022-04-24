@@ -1,40 +1,53 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, SecurityContext } from '@angular/core';
+import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
+import { HomeComponent } from './home/home.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { MarkdownModule } from 'ngx-markdown';
+import { PostComponent } from './post/post.component';
+import { PostListComponent } from './post/post-list/post-list.component';
+import { FirebaseModule } from './platform/firebase/firebase.module';
+import { NavModule } from './nav/nav.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CommentComponent } from './post/comment/comment.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    PostComponent,
+    PostListComponent,
+    DashboardComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
-    BrowserAnimationsModule,
+    FirebaseModule,
+    NavModule,
+    HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
+      // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAnalytics(() => getAnalytics()),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    BrowserAnimationsModule,
+    BrowserTransferStateModule,
+    CoreModule,
+    MarkdownModule.forRoot({
+      sanitize: SecurityContext.NONE
+    })
   ],
-  providers: [
-    ScreenTrackingService,UserTrackingService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

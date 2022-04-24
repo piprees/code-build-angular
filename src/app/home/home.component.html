@@ -1,0 +1,29 @@
+<mat-card class="ng-card mat-elevation-z0 ng-card-outline ng-message">
+  <h1>
+    Welcome to {{ env.title }}!
+  </h1>
+  <span class="ng-front">
+    {{ env.description }}
+  </span>
+</mat-card>
+<br />
+<mat-tab-group class="ng-card" animationDuration="0ms" (selectedIndexChange)="tabChange($event)">
+  <mat-tab label="New">
+    <ng-template matTabContent>
+      <br>
+      <!--<app-post-list></app-post-list>-->
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Updated">
+    <ng-template matTabContent>
+      <br>
+      <!--<app-post-list type="updated"></app-post-list>-->
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Top">
+    <ng-template matTabContent>
+      <br>
+      <!--<app-post-list type="liked"></app-post-list>-->
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
