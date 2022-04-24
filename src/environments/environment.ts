@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  firebase: JSON.parse(process.env['FIREBASE_API_DEV'] as string),
   production: false
 };
 
